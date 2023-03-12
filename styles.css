@@ -1,0 +1,10 @@
+#container {
+  display: grid;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  background-color: bisque;
+  border: 1px solid black;
+}
