@@ -2,8 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#container");
 
   function createGrid(userNum, container) {
+    container.innerHTML = "";
     container.style.gridTemplateColumns = `repeat(${userNum}, 1fr)`;
     container.style.gridTemplateRows = `repeat(${userNum}, 1fr)`;
+    const root = document.documentElement;
+    root.style.setProperty("--num", userNum);
     for (let i = 0; i < userNum; i++) {
       for (let j = 0; j < userNum; j++) {
         const cell = document.createElement("div");
