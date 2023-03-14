@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#container");
 
+  //Populates the grid area with user-decided number of cells
   function createGrid(userNum, container) {
     container.innerHTML = "";
     container.style.gridTemplateColumns = `repeat(${userNum}, 1fr)`;
@@ -15,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    //Fills the cells as the mouse eneters each one.
     const cells = document.querySelectorAll(".cell");
-
     cells.forEach((cell) => {
       cell.addEventListener("mouseenter", () => {
         cell.style.backgroundColor = "blue";
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  //Asks the user for the number of cells to fill the grid.
   const numButton = document.querySelector("#numButton");
   numButton.addEventListener("click", () => {
     const userInput = prompt("Please enter a number between 0 and 100");
