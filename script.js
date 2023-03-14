@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#container");
 
   //Populates the grid area with user-decided number of cells
-  function createGrid(userNum, container) {
+  function createGrid(userNum, container, colorFN = fillCellBlue) {
     container.innerHTML = "";
     container.style.gridTemplateColumns = `repeat(${userNum}, 1fr)`;
     container.style.gridTemplateRows = `repeat(${userNum}, 1fr)`;
@@ -13,16 +13,39 @@ document.addEventListener("DOMContentLoaded", () => {
         const cell = document.createElement("div");
         cell.classList.add("cell");
         container.appendChild(cell);
+        cell.addEventListener("mouseenter", colorFN);
       }
     }
+  }
 
-    //Fills the cells as the mouse eneters each one.
+  //Links rainbow button click to effect.
+  const rainbow = document.querySelector("#rainbowButton");
+  rainbow.addEventListener("click", () => {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
-      cell.addEventListener("mouseenter", () => {
-        cell.style.backgroundColor = "blue";
-      });
+      cell.removeEventListener("mouseenter", fillCellBlue);
+      cell.addEventListener("mouseenter", fillCellRandomColor);
     });
+  });
+
+  //Default cell fill colour.
+  function fillCellBlue() {
+    this.style.backgroundColor = "blue";
+  }
+
+  //enables RAINBOW button function
+  function fillCellRandomColor() {
+    this.style.backgroundColor = getRandomColor();
+  }
+
+  //Returns a random hexadecimal color code
+  function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 
   //Asks the user for the number of cells to fill the grid.
