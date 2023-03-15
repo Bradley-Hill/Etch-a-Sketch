@@ -1,3 +1,13 @@
+body {
+  background-color: #fafafa;
+}
+
+h1 {
+  color: #b71c1c;
+  font-size: 36px;
+  align-items: center;
+}
+
 #container {
   display: grid;
   grid-template-columns: repeat(var(--num), 1fr);
@@ -10,4 +20,23 @@
 .cell {
   background-color: bisque;
   border: 1px solid black;
+}
+
+button {
+  background-color: #4caf50; /* Green background color */
+  border: none; /* No border */
+  color: white; /* White text color */
+  padding: 12px 24px; /* Padding for the text */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Make it an inline element */
+  font-size: 16px; /* Font size */
+  margin: 10px; /* Margin between buttons */
+  cursor: pointer; /* Change the cursor to a pointer on hover */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a shadow */
+}
+
+button:hover {
+  background-color: #3e8e41; /* Darker green on hover */
 }
