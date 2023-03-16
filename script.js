@@ -21,8 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
   //Links rainbow button click to effect.
   const rainbow = document.querySelector("#rainbowButton");
   rainbow.addEventListener("click", () => {
+    isOpacityActive = false;
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
+      cell.removeEventListener("mouseenter", increaseOpacityBlack);
       cell.removeEventListener("mouseenter", fillCellBlue);
       cell.addEventListener("mouseenter", fillCellRandomColor);
     });
@@ -63,8 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
   //Links Opacity Button click to effect
   const opacity = document.querySelector("#OpacButton");
   opacity.addEventListener("click", () => {
+    isOpacityActive = true;
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
+      cell.removeEventListener("mouseenter", fillCellRandomColor);
       cell.removeEventListener("mouseenter", fillCellBlue);
       cell.addEventListener("mouseenter", increaseOpacityBlack);
     });
@@ -72,17 +76,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Increase of Opacity in cells
   function increaseOpacityBlack() {
-    let counter = 0;
-    const maxCount = 10;
-    const increment = 0.1;
-    let opacity = 0;
-
-    return function () {
-      if (counter < maxCount) {
-        counter++;
-        opacity += increment;
-        this.style.backgroundColor = `rgba(0,0,0,${opacity})`;
-      }
-    };
+    let currentOpacity = parseFloat(this.dataset.opacity) || 0;
+    if (currentOpacity >= 1) {
+      this.style.backgroundColor = "rgba(0, 0, 0, 1)";
+      return;
+    }
+    currentOpacity += 0.1;
+    this.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity})`;
+    this.dataset.opacity = currentOpacity;
   }
 });
