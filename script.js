@@ -59,4 +59,30 @@ document.addEventListener("DOMContentLoaded", () => {
       createGrid(userNum, container);
     }
   });
+
+  //Links Opacity Button click to effect
+  const opacity = document.querySelector("#OpacButton");
+  opacity.addEventListener("click", () => {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+      cell.removeEventListener("mouseenter", fillCellBlue);
+      cell.addEventListener("mouseenter", increaseOpacityBlack);
+    });
+  });
+
+  //Increase of Opacity in cells
+  function increaseOpacityBlack() {
+    let counter = 0;
+    const maxCount = 10;
+    const increment = 0.1;
+    let opacity = 0;
+
+    return function () {
+      if (counter < maxCount) {
+        counter++;
+        opacity += increment;
+        this.style.backgroundColor = `rgba(0,0,0,${opacity})`;
+      }
+    };
+  }
 });
